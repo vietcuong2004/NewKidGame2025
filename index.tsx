@@ -14,14 +14,14 @@ type GameType = 'equation-match' | 'object-match' | 'calculation-path' | 'symbol
 
 // --- MAIN APP ---
 const App: React.FC = () => {
-  const [game, setGame] = useState<GameType>('character-fill');
+  const [game, setGame] = useState<GameType>('symbol-math');
   const gameComponentRef = useRef<GameComponentHandles>(null);
 
   const games = [
     { id: 'equation-match' as GameType, name: 'Nối phép tính' },
     { id: 'object-match' as GameType, name: 'Nối bóng' },
     { id: 'calculation-path' as GameType, name: 'Mê cung toán học' },
-    { id: 'symbol-math' as GameType, name: 'Toán học biểu tượng' },
+    { id: 'symbol-math' as GameType, name: 'Mã hóa phép tính' },
     { id: 'color-puzzle' as GameType, name: 'Tô màu mảnh ghép' },
     { id: 'character-fill' as GameType, name: 'Điền kí tự' }, // Add new game to list
   ];

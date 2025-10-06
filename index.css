@@ -146,6 +146,42 @@ body {
   gap: 20px;
   width: 100%;
 }
+.symbol-math-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.theme-input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  min-width: 250px;
+}
+.symbol-math-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  padding: 20px;
+}
+.symbol-math-error {
+  color: var(--incorrect-color);
+  font-weight: 700;
+  padding: 15px;
+  border: 1px solid var(--incorrect-color);
+  border-radius: 8px;
+  background-color: #fdecea;
+  text-align: center;
+}
 .symbol-math-legend {
   display: flex;
   flex-wrap: wrap;
@@ -156,18 +192,22 @@ body {
 }
 .legend-item {
   width: 60px;
+  height: 75px;
   border: 1px solid #ddd;
   border-radius: 8px;
   text-align: center;
   padding: 5px;
-}
-.legend-item svg {
-  width: 35px;
-  height: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  line-height: 1.1;
 }
 .legend-item-number {
   font-size: 18px;
   font-weight: 700;
+  margin-top: 2px;
 }
 .symbol-math-problems {
   display: grid;
@@ -191,10 +231,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-}
-.gift-box svg {
-  width: 40px;
-  height: 40px;
+  font-size: 36px;
 }
 .problem-input {
   width: 100%;
