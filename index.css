@@ -138,7 +138,7 @@ body {
 
 
 /* Game-specific styles */
-/* Symbol Math / Cong So */
+/* Symbol Math / Ma Hoa Phep Tinh */
 .symbol-math-game {
   display: flex;
   flex-direction: column;
@@ -239,24 +239,32 @@ body {
 
 /* NoiBong Specific */
 .noi-bong-game {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
   max-width: 400px;
   justify-content: center;
-  gap: 20px;
+  gap: 0 20px;
 }
+
 .noi-bong-game .matching-column {
   gap: 20px;
-  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
 }
+
+.noi-bong-game .matching-column.left-column {
+  align-items: flex-end;
+}
+
+.noi-bong-game .matching-column.right-column {
+  align-items: flex-start;
+}
+
 .noi-bong-game .match-row {
   display: flex;
   align-items: center;
   gap: 15px;
-}
-.noi-bong-game .matching-column.left-column {
-  align-items: flex-end;
-}
-.noi-bong-game .matching-column.right-column {
-  align-items: flex-start;
 }
 .noi-bong-game .match-item {
   width: 80px;
@@ -409,6 +417,145 @@ body {
   padding: 0;
 }
 
+/* Color Puzzle Game */
+.color-puzzle-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.reference-puzzle {
+  width: 150px;
+  height: 150px;
+  border: 2px solid var(--primary-color);
+  padding: 5px;
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.puzzle-instance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.puzzle-svg {
+  width: 120px;
+  height: 120px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.puzzle-piece {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.puzzle-piece:hover {
+  opacity: 0.8;
+}
+
+.color-palette {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.color-swatch.selected {
+  border-color: var(--primary-color);
+  transform: scale(1.15);
+  box-shadow: 0 0 8px rgba(41, 182, 246, 0.7);
+}
+
+
+/* Character Fill Game */
+.character-fill-game {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.character-fill-legend, .character-fill-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.character-fill-legend {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+}
+
+.char-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.char-figure-box, .char-symbol-box {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.char-figure-box svg {
+  width: 50px;
+  height: 50px;
+}
+.char-symbol-box {
+    border: 2px solid #ccc;
+}
+.char-symbol-box svg {
+  width: 30px;
+  height: 30px;
+}
+.char-input-box {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+.char-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Nunito', sans-serif;
+    padding: 0;
+    background: transparent;
+    border-radius: 6px;
+}
+
 @media (max-width: 768px) {
   .app-layout { padding: 15px; }
   .app-header h1 { font-size: 24px; }
@@ -419,11 +566,15 @@ body {
   .matching-canvas { display: none; }
   .math-maze { transform: scale(0.9); transform-origin: top center; height: 650px; }
   .symbol-math-problems { grid-template-columns: 1fr; }
+  .puzzle-grid { grid-template-columns: 1fr; }
+  .char-figure-box, .char-symbol-box, .char-input-box { width: 50px; height: 50px; }
 }
 
 @media (max-width: 480px) {
     .math-maze { transform: scale(0.65); transform-origin: top center; height: 470px; }
     .content-area { padding: 10px; }
+    .char-figure-box, .char-symbol-box, .char-input-box { width: 40px; height: 40px; }
+    .char-input { font-size: 18px; }
 }
 
 /* Styles for PDF Generation */

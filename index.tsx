@@ -7,19 +7,23 @@ import NoiPhepTinhGame from './NoiPhepTinh';
 import NoiBongGame from './NoiBong';
 import MeCungToanHocGame from './MeCungToanHoc';
 import MaHoaPhepTinhGame from './MaHoaPhepTinh';
+import ToMauManhGhepGame from './ToMauManhGhep';
+import DienKiTuGame from './DienKiTu'; // Import the new game
 
-type GameType = 'equation-match' | 'object-match' | 'calculation-path' | 'symbol-math';
+type GameType = 'equation-match' | 'object-match' | 'calculation-path' | 'symbol-math' | 'color-puzzle' | 'character-fill'; // Add new game type
 
 // --- MAIN APP ---
 const App: React.FC = () => {
-  const [game, setGame] = useState<GameType>('object-match');
+  const [game, setGame] = useState<GameType>('character-fill');
   const gameComponentRef = useRef<GameComponentHandles>(null);
 
   const games = [
     { id: 'equation-match' as GameType, name: 'Nối phép tính' },
     { id: 'object-match' as GameType, name: 'Nối bóng' },
     { id: 'calculation-path' as GameType, name: 'Mê cung toán học' },
-    { id: 'symbol-math' as GameType, name: 'Mã hóa phép tính' },
+    { id: 'symbol-math' as GameType, name: 'Toán học biểu tượng' },
+    { id: 'color-puzzle' as GameType, name: 'Tô màu mảnh ghép' },
+    { id: 'character-fill' as GameType, name: 'Điền kí tự' }, // Add new game to list
   ];
 
   const renderGame = () => {
@@ -32,6 +36,10 @@ const App: React.FC = () => {
         return <MeCungToanHocGame ref={gameComponentRef} />;
       case 'symbol-math':
         return <MaHoaPhepTinhGame ref={gameComponentRef} />;
+      case 'color-puzzle':
+        return <ToMauManhGhepGame ref={gameComponentRef} />;
+      case 'character-fill': // Add render case
+        return <DienKiTuGame ref={gameComponentRef} />;
       default:
         return null;
     }
