@@ -3,35 +3,35 @@ import { createRoot } from 'react-dom/client';
 import type { GameComponentHandles } from './utils';
 
 // Import the new game components
-import CongSoGame from './CongSo';
 import NoiPhepTinhGame from './NoiPhepTinh';
 import NoiBongGame from './NoiBong';
 import MeCungToanHocGame from './MeCungToanHoc';
+import MaHoaPhepTinhGame from './MaHoaPhepTinh';
 
-type GameType = 'sum-it-up' | 'equation-match' | 'object-match' | 'calculation-path';
+type GameType = 'equation-match' | 'object-match' | 'calculation-path' | 'symbol-math';
 
 // --- MAIN APP ---
 const App: React.FC = () => {
-  const [game, setGame] = useState<GameType>('sum-it-up');
+  const [game, setGame] = useState<GameType>('object-match');
   const gameComponentRef = useRef<GameComponentHandles>(null);
 
   const games = [
-    { id: 'sum-it-up' as GameType, name: 'Cộng số' },
     { id: 'equation-match' as GameType, name: 'Nối phép tính' },
     { id: 'object-match' as GameType, name: 'Nối bóng' },
     { id: 'calculation-path' as GameType, name: 'Mê cung toán học' },
+    { id: 'symbol-math' as GameType, name: 'Toán học biểu tượng' },
   ];
 
   const renderGame = () => {
     switch(game) {
-      case 'sum-it-up':
-        return <CongSoGame ref={gameComponentRef} />;
       case 'equation-match':
         return <NoiPhepTinhGame ref={gameComponentRef} />;
       case 'object-match':
         return <NoiBongGame ref={gameComponentRef} />;
       case 'calculation-path':
         return <MeCungToanHocGame ref={gameComponentRef} />;
+      case 'symbol-math':
+        return <MaHoaPhepTinhGame ref={gameComponentRef} />;
       default:
         return null;
     }

@@ -213,7 +213,7 @@ const NoiBongGame = forwardRef<GameComponentHandles>((props, ref) => {
   return (
     <div className="matching-game-container noi-bong-game" ref={gameContentRef}>
       <canvas ref={canvasRef} className="matching-canvas"></canvas>
-      <div className="matching-column">
+      <div className="matching-column left-column">
         {leftItems.map(item => (
             <div key={item.id} className="match-row">
                 {renderItem(item, 'outline', handleLeftClick)}
@@ -221,10 +221,8 @@ const NoiBongGame = forwardRef<GameComponentHandles>((props, ref) => {
             </div>
         ))}
       </div>
-      <div className="separator-line-container">
-        <div className="separator-line"></div>
-      </div>
-      <div className="matching-column">
+      <div className="separator-line"></div>
+      <div className="matching-column right-column">
         {rightItems.map(item => (
           <div key={item.id} className="match-row">
             <div ref={el => { dotRefs.current[item.id] = el; }} className="connection-dot"></div>
