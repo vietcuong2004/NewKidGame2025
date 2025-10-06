@@ -19,7 +19,7 @@ const App: React.FC = () => {
     { id: 'equation-match' as GameType, name: 'Nối phép tính' },
     { id: 'object-match' as GameType, name: 'Nối bóng' },
     { id: 'calculation-path' as GameType, name: 'Mê cung toán học' },
-    { id: 'symbol-math' as GameType, name: 'Toán học biểu tượng' },
+    { id: 'symbol-math' as GameType, name: 'Mã hóa phép tính' },
   ];
 
   const renderGame = () => {
