@@ -533,9 +533,49 @@ body {
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
+  align-items: center;
 }
+
+.character-fill-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.character-fill-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.character-fill-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  padding: 20px;
+}
+
+.character-fill-error {
+  color: var(--incorrect-color);
+  font-weight: 700;
+  padding: 15px;
+  border: 1px solid var(--incorrect-color);
+  border-radius: 8px;
+  background-color: #fdecea;
+  text-align: center;
+}
+
 
 .character-fill-legend, .character-fill-grid {
   display: grid;
@@ -562,18 +602,13 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  font-size: 32px; /* For Emojis */
 }
 
-.char-figure-box svg {
-  width: 50px;
-  height: 50px;
-}
 .char-symbol-box {
     border: 2px solid #ccc;
-}
-.char-symbol-box svg {
-  width: 30px;
-  height: 30px;
+    font-size: 28px; /* Slightly smaller for symbols */
+    font-weight: 700;
 }
 .char-input-box {
     width: 60px;
@@ -586,7 +621,7 @@ body {
     height: 100%;
     border: none;
     text-align: center;
-    font-size: 24px;
+    font-size: 28px; /* Match symbol box */
     font-family: 'Nunito', sans-serif;
     padding: 0;
     background: transparent;
@@ -611,7 +646,8 @@ body {
     .math-maze { transform: scale(0.65); transform-origin: top center; height: 470px; }
     .content-area { padding: 10px; }
     .char-figure-box, .char-symbol-box, .char-input-box { width: 40px; height: 40px; }
-    .char-input { font-size: 18px; }
+    .char-figure-box, .char-symbol-box { font-size: 24px; }
+    .char-input { font-size: 22px; }
 }
 
 /* Styles for PDF Generation */
