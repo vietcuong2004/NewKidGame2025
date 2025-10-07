@@ -7,28 +7,30 @@ import './index.css';
 
 // Import the new game components
 import NoiPhepTinhGame from './Games/NoiPhepTinh';
-import NoiBongGame from './Games/NoiBong';
+import NoiSoGame from './Games/NoiSo';
 import MeCungToanHocGame from './Games/MeCungToanHoc';
 import MaHoaPhepTinhGame from './Games/MaHoaPhepTinh';
 import ToMauManhGhepGame from './Games/ToMauManhGhep';
 import DienKiTuGame from './Games/DienKiTu';
-import ToTracNghiemGame from './Games/ToTracNghiem'; // Import the new game
+import ToTracNghiemGame from './Games/ToTracNghiem';
+import TimHinhDungGame from './Games/TimHinhDung'; 
 
-type GameType = 'equation-match' | 'object-match' | 'calculation-path' | 'symbol-math' | 'color-puzzle' | 'character-fill' | 'multiple-choice-coloring'; // Add new game type
+type GameType = 'equation-match' | 'number-match' | 'calculation-path' | 'symbol-math' | 'color-puzzle' | 'character-fill' | 'multiple-choice-coloring' | 'pattern-find'; 
 
 // --- MAIN APP ---
 const App: React.FC = () => {
-  const [game, setGame] = useState<GameType>('equation-match');
+  const [game, setGame] = useState<GameType>('number-match');
   const gameComponentRef = useRef<GameComponentHandles>(null);
 
   const games = [
     { id: 'equation-match' as GameType, name: 'Nối phép tính', description: 'Nối phép tính ở cột bên trái với kết quả đúng ở cột bên phải.' },
-    { id: 'object-match' as GameType, name: 'Nối bóng', description: 'Nối các quả bóng có hình giống nhau ở hai cột để tạo thành một cặp.' },
+    { id: 'number-match' as GameType, name: 'Nối Số', description: 'Nối các ô chứa hình ảnh ở cột trái với ô chứa số lượng tương ứng ở cột phải.' },
     { id: 'calculation-path' as GameType, name: 'Mê cung toán học', description: 'Bắt đầu từ ô "Bắt đầu", thực hiện các phép tính theo mũi tên để tìm đường đến ô "Kết thúc" và điền kết quả vào các ô trống.' },
     { id: 'symbol-math' as GameType, name: 'Mã hóa phép tính', description: 'Dựa vào bảng quy đổi các biểu tượng thành số, hãy giải các phép tính bên dưới.' },
     { id: 'color-puzzle' as GameType, name: 'Tô màu mảnh ghép', description: 'Quan sát hình mẫu ở trên và tô màu các mảnh ghép ở dưới sao cho giống hệt với hình mẫu.' },
     { id: 'character-fill' as GameType, name: 'Điền kí tự', description: 'Dựa vào bảng quy đổi, điền ký tự tương ứng với mỗi hình vào ô trống bên dưới.' },
     { id: 'multiple-choice-coloring' as GameType, name: 'Tô trắc nghiệm', description: 'Tô màu các ô tròn ở cột bên phải để tạo thành hình giống hệt với mẫu ở cột bên trái.' },
+    { id: 'pattern-find' as GameType, name: 'Tìm hình đúng', description: 'Tìm ra quy luật của các hình và chọn hình còn thiếu trong dấu "?" từ các lựa chọn bên dưới.' },
   ];
   
   const currentGame = games.find(g => g.id === game);
@@ -37,8 +39,8 @@ const App: React.FC = () => {
     switch(game) {
       case 'equation-match':
         return <NoiPhepTinhGame ref={gameComponentRef} />;
-      case 'object-match':
-        return <NoiBongGame ref={gameComponentRef} />;
+      case 'number-match':
+        return <NoiSoGame ref={gameComponentRef} />;
       case 'calculation-path':
         return <MeCungToanHocGame ref={gameComponentRef} />;
       case 'symbol-math':
@@ -47,8 +49,10 @@ const App: React.FC = () => {
         return <ToMauManhGhepGame ref={gameComponentRef} />;
       case 'character-fill':
         return <DienKiTuGame ref={gameComponentRef} />;
-      case 'multiple-choice-coloring': // Add render case
+      case 'multiple-choice-coloring':
         return <ToTracNghiemGame ref={gameComponentRef} />;
+      case 'pattern-find':
+        return <TimHinhDungGame ref={gameComponentRef} />;
       default:
         return null;
     }

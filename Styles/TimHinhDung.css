@@ -1,0 +1,110 @@
+/* TimHinhDung.css */
+.pattern-find-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.pattern-find-loader,
+.pattern-find-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+.pattern-find-loader { color: var(--primary-color); }
+.pattern-find-error { color: var(--incorrect-color); }
+
+.pattern-find-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 2px solid #ddd;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  background-color: #fafafa;
+}
+
+.pattern-grid-cell {
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.pattern-grid-cell svg {
+  width: 80%;
+  height: 80%;
+}
+.question-mark {
+  font-size: 60px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.pattern-find-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.pattern-option-cell {
+  width: 80px;
+  height: 80px;
+  padding: 5px;
+  border: 3px solid #ccc;
+  border-radius: var(--border-radius);
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pattern-option-cell:hover {
+  transform: translateY(-5px);
+  border-color: var(--secondary-color);
+}
+.pattern-option-cell svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pattern-option-cell.correct {
+  border-color: var(--correct-color);
+  background-color: #e8f5e9;
+  transform: scale(1.1);
+}
+
+.pattern-option-cell.incorrect {
+  border-color: var(--incorrect-color);
+  background-color: #ffebee;
+  transform: scale(1.1);
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0) scale(1.1); }
+  25% { transform: translateX(-5px) scale(1.1); }
+  75% { transform: translateX(5px) scale(1.1); }
+}
+
+@media (max-width: 480px) {
+  .question-mark { font-size: 40px; }
+  .pattern-option-cell { width: 60px; height: 60px; }
+}
