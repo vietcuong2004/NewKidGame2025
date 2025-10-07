@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { GameComponentHandles, getRandomInt, shuffleArray } from './utils';
+import { GameComponentHandles, getRandomInt, shuffleArray } from '../utils';
 
 interface MatchItem {
   id: string;

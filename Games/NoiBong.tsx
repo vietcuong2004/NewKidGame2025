@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { GameComponentHandles, shuffleArray } from './utils';
+import { GameComponentHandles, shuffleArray } from '../utils';
 
 // --- SVG Icon Components ---
 type IconProps = { mode: 'outline' | 'filled' };

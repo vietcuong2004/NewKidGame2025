@@ -1,7 +1,7 @@
 import React, { useState, useCallback, forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { GameComponentHandles, shuffleArray } from './utils';
+import { GameComponentHandles, shuffleArray } from '../utils';
 
 // --- L-Shape Puzzle Piece Components ---
 const LPiece1: React.FC<{ color: string; onClick: () => void }> = ({ color, onClick }) => (

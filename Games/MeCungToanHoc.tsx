@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { GameComponentHandles, getRandomInt } from './utils';
+import { GameComponentHandles, getRandomInt } from '../utils';
 
 interface MazeNode {
   id: number;

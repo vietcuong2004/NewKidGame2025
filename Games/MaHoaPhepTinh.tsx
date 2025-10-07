@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { GameComponentHandles } from './utils';
+import { GameComponentHandles } from '../utils';
 import { GoogleGenAI, Type } from "@google/genai";
 
 // Data structures for the game
