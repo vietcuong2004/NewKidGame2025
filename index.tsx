@@ -11,9 +11,10 @@ import NoiBongGame from './Games/NoiBong';
 import MeCungToanHocGame from './Games/MeCungToanHoc';
 import MaHoaPhepTinhGame from './Games/MaHoaPhepTinh';
 import ToMauManhGhepGame from './Games/ToMauManhGhep';
-import DienKiTuGame from './Games/DienKiTu'; // Import the new game
+import DienKiTuGame from './Games/DienKiTu';
+import ToTracNghiemGame from './Games/ToTracNghiem'; // Import the new game
 
-type GameType = 'equation-match' | 'object-match' | 'calculation-path' | 'symbol-math' | 'color-puzzle' | 'character-fill'; // Add new game type
+type GameType = 'equation-match' | 'object-match' | 'calculation-path' | 'symbol-math' | 'color-puzzle' | 'character-fill' | 'multiple-choice-coloring'; // Add new game type
 
 // --- MAIN APP ---
 const App: React.FC = () => {
@@ -27,6 +28,7 @@ const App: React.FC = () => {
     { id: 'symbol-math' as GameType, name: 'Mã hóa phép tính', description: 'Dựa vào bảng quy đổi các biểu tượng thành số, hãy giải các phép tính bên dưới.' },
     { id: 'color-puzzle' as GameType, name: 'Tô màu mảnh ghép', description: 'Quan sát hình mẫu ở trên và tô màu các mảnh ghép ở dưới sao cho giống hệt với hình mẫu.' },
     { id: 'character-fill' as GameType, name: 'Điền kí tự', description: 'Dựa vào bảng quy đổi, điền ký tự tương ứng với mỗi hình vào ô trống bên dưới.' },
+    { id: 'multiple-choice-coloring' as GameType, name: 'Tô trắc nghiệm', description: 'Tô màu các ô tròn ở cột bên phải để tạo thành hình giống hệt với mẫu ở cột bên trái.' },
   ];
   
   const currentGame = games.find(g => g.id === game);
@@ -43,8 +45,10 @@ const App: React.FC = () => {
         return <MaHoaPhepTinhGame ref={gameComponentRef} />;
       case 'color-puzzle':
         return <ToMauManhGhepGame ref={gameComponentRef} />;
-      case 'character-fill': // Add render case
+      case 'character-fill':
         return <DienKiTuGame ref={gameComponentRef} />;
+      case 'multiple-choice-coloring': // Add render case
+        return <ToTracNghiemGame ref={gameComponentRef} />;
       default:
         return null;
     }

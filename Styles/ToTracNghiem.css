@@ -1,0 +1,100 @@
+/* Multiple Choice Coloring Game Styles */
+.multiple-choice-coloring-game {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px; /* row-gap column-gap */
+  width: 100%;
+  justify-items: center;
+}
+
+.pattern-loader, .pattern-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.pattern-loader { color: var(--primary-color); }
+.pattern-error { color: var(--incorrect-color); }
+
+
+.pattern-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 350px; /* Increased max-width */
+}
+
+.pattern-separator {
+  font-size: 28px;
+  color: #555;
+  font-weight: 700;
+}
+
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Changed to 5 columns */
+  gap: 6px;
+  padding: 8px; /* Increased padding */
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 150px; /* Adjusted size */
+  height: 150px; /* Adjusted size */
+}
+
+.pattern-dot {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #ccc;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pattern-dot.filled {
+  background-color: #333;
+  border-color: #333;
+}
+
+.user-grid .pattern-dot {
+  cursor: pointer;
+}
+
+.user-grid .pattern-dot:not(.filled):hover {
+  background-color: #e0e0e0;
+}
+
+/* Force width for PDF export to capture the full grid */
+.pdf-print-container .multiple-choice-coloring-game {
+  width: 740px;
+}
+
+/* Tablet and below */
+@media (max-width: 768px) {
+    .multiple-choice-coloring-game {
+        grid-template-columns: 1fr; /* Switch to a single column */
+        gap: 25px;
+    }
+}
+
+/* Phone only */
+@media (max-width: 480px) {
+  .pattern-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pattern-separator {
+    transform: rotate(90deg);
+  }
+  .pattern-grid {
+    width: 125px; /* Adjusted for smaller screens */
+    height: 125px; /* Adjusted for smaller screens */
+    gap: 4px;
+    padding: 6px;
+  }
+}
