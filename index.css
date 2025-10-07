@@ -188,7 +188,8 @@ body {
   justify-content: center;
   gap: 8px;
   border-bottom: 2px solid #eee;
-  padding-bottom: 15px;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
 }
 .legend-item {
   width: 60px;

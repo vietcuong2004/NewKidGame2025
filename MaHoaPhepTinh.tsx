@@ -12,9 +12,10 @@ interface LegendItem {
 
 interface SymbolProblem {
     id: number;
-    operand1: string; // The emoji character
-    operand2: string; // The emoji character
-    sum: number;
+    operand1: string;
+    operand2: string;
+    operator: '+' | '-';
+    result: number;
 }
 
 // Gemini response schema definition
@@ -35,15 +36,16 @@ const responseSchema = {
     },
     problems: {
       type: Type.ARRAY,
-      description: 'A list of 12 simple addition problems using the emojis as operands.',
+      description: 'A list of 12 simple math problems with a mix of addition and subtraction, using the emojis as operands.',
       items: {
         type: Type.OBJECT,
         properties: {
           operand1: { type: Type.STRING, description: 'The emoji character of the first operand.' },
           operand2: { type: Type.STRING, description: 'The emoji character of the second operand.' },
-          sum: { type: Type.INTEGER, description: 'The correct sum of the values of the two operands.' },
+          operator: { type: Type.STRING, description: 'The operator, either "+" or "-".' },
+          result: { type: Type.INTEGER, description: 'The correct result of the operation.' },
         },
-        required: ['operand1', 'operand2', 'sum'],
+        required: ['operand1', 'operand2', 'operator', 'result'],
       },
     },
   },
@@ -75,8 +77,8 @@ const MaHoaPhepTinhGame = forwardRef<GameComponentHandles>((props, ref) => {
               Create a fun emoji math worksheet for a child aged 5-7. The theme is "${theme}".
               1. Generate a list of 9 unique, simple, and visually distinct emojis that fit the theme "${theme}".
               2. Assign a unique number from 1 to 9 to each emoji.
-              3. Create a list of 12 simple addition problems using the emojis as operands.
-              4. The sum for each problem can be greater than 9.
+              3. Create a list of 12 simple math problems using the emojis as operands.
+              4. The problems must be a mix of both addition (+) and subtraction (-). For subtraction, ensure the result is not negative.
               5. The 'icon' for each item must be a single emoji character (e.g., "🐶", "🍎").
               6. Return the entire output as a single JSON object that strictly follows the provided schema. Do not include any text or markdown formatting outside of the JSON object.
             `;
@@ -196,7 +198,7 @@ const MaHoaPhepTinhGame = forwardRef<GameComponentHandles>((props, ref) => {
                             {problems.map(p => (
                                 <div key={p.id} className="problem-row">
                                     <div className="gift-box">{p.operand1}</div>
-                                    <span>+</span>
+                                    <span>{p.operator}</span>
                                     <div className="gift-box">{p.operand2}</div>
                                     <span>=</span>
                                     <div className="gift-box">
@@ -205,7 +207,7 @@ const MaHoaPhepTinhGame = forwardRef<GameComponentHandles>((props, ref) => {
                                             className="problem-input"
                                             value={userAnswers[p.id] || ''}
                                             onChange={(e) => handleInputChange(p.id, e.target.value)}
-                                            aria-label={`Answer for problem ${p.operand1} + ${p.operand2}`}
+                                            aria-label={`Answer for problem ${p.operand1} ${p.operator} ${p.operand2}`}
                                         />
                                     </div>
                                 </div>
