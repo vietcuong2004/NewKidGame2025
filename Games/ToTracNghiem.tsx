@@ -19,11 +19,32 @@ const responseSchema = {
   required: ['grid'],
 };
 
+// Default patterns to use as a fallback for API errors
+const defaultPatterns = [
+  [0,1,1,1,0, 1,0,0,0,1, 1,1,1,1,1, 1,0,0,0,1, 1,0,0,0,1], // A
+  [1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0, 1,0,0,0,1, 1,1,1,1,0], // B
+  [0,1,1,1,0, 1,0,0,0,0, 1,0,0,0,0, 1,0,0,0,0, 0,1,1,1,0], // C
+  [1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 1,0,0,0,0, 1,1,1,1,1], // E
+  [0,1,1,1,0, 1,0,0,0,0, 0,1,1,1,0, 0,0,0,0,1, 0,1,1,1,0], // S
+  [1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 1,0,0,0,0, 1,0,0,0,0], // F
+  [1,0,0,0,1, 1,0,0,0,1, 1,1,1,1,1, 0,0,0,0,1, 0,0,0,0,1], // 4
+  [1,1,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 0,0,0,0,1, 1,1,1,1,0], // 5
+];
+
 interface PatternRow {
     id: number;
     model: number[];
     userGrid: number[];
 }
+
+// Helper to format default patterns for the state
+const generateDefaultPatterns = (): PatternRow[] => {
+    return defaultPatterns.map((model, index) => ({
+        id: index,
+        model: model,
+        userGrid: Array(25).fill(0),
+    }));
+};
 
 const ToTracNghiemGame = forwardRef<GameComponentHandles>((props, ref) => {
     const [patterns, setPatterns] = useState<PatternRow[]>([]);
@@ -75,7 +96,15 @@ const ToTracNghiemGame = forwardRef<GameComponentHandles>((props, ref) => {
             if (e instanceof Error) {
                 errorMessage = e.message;
             }
-            setError(errorMessage);
+            
+            // Check for rate limit error and use fallback
+            if (errorMessage.includes("429") || errorMessage.toUpperCase().includes("RESOURCE_EXHAUSTED")) {
+                console.log("API limit reached. Using default patterns.");
+                setPatterns(generateDefaultPatterns());
+                setError(null); // Clear any previous errors
+            } else {
+                setError(errorMessage);
+            }
         } finally {
             setIsLoading(false);
         }

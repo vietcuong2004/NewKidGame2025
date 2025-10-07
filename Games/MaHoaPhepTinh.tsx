@@ -19,6 +19,13 @@ interface SymbolProblem {
     result: number;
 }
 
+// Fix: Define a type for game data to ensure operator is correctly typed as '+' or '-'.
+// This resolves a TypeScript error and improves type safety for API responses.
+interface GameData {
+  iconMap: LegendItem[];
+  problems: Omit<SymbolProblem, 'id'>[];
+}
+
 // Gemini response schema definition
 const responseSchema = {
   type: Type.OBJECT,
@@ -53,6 +60,29 @@ const responseSchema = {
   required: ['iconMap', 'problems'],
 };
 
+// Default game data to use as a fallback for API errors
+const defaultGameData: GameData = {
+  iconMap: [
+    { icon: '🐶', value: 1 }, { icon: '🐱', value: 2 }, { icon: '🐭', value: 3 },
+    { icon: '🦊', value: 4 }, { icon: '🐻', value: 5 }, { icon: '🐼', value: 6 },
+    { icon: '🐨', value: 7 }, { icon: '🐯', value: 8 }, { icon: '🦁', value: 9 },
+  ],
+  problems: [
+    { operand1: '🐱', operand2: '🐶', operator: '+', result: 3 },
+    { operand1: '🦁', operand2: '🦊', operator: '-', result: 5 },
+    { operand1: '🐻', operand2: '🐭', operator: '+', result: 8 },
+    { operand1: '🐯', operand2: '🐨', operator: '-', result: 1 },
+    { operand1: '🐼', operand2: '🐱', operator: '+', result: 8 },
+    { operand1: '🦊', operand2: '🐶', operator: '+', result: 5 },
+    { operand1: '🐨', operand2: '🐻', operator: '-', result: 2 },
+    { operand1: '🐭', operand2: '🐭', operator: '+', result: 6 },
+    { operand1: '🦁', operand2: '🐯', operator: '-', result: 1 },
+    { operand1: '🐼', operand2: '🦊', operator: '-', result: 2 },
+    { operand1: '🐶', operand2: '🐨', operator: '+', result: 8 },
+    { operand1: '🐯', operand2: '🐭', operator: '-', result: 5 },
+  ]
+};
+
 const MaHoaPhepTinhGame = forwardRef<GameComponentHandles>((props, ref) => {
     const [theme, setTheme] = useState('động vật');
     const [isLoading, setIsLoading] = useState(true);
@@ -62,6 +92,15 @@ const MaHoaPhepTinhGame = forwardRef<GameComponentHandles>((props, ref) => {
     const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
     const gameContentRef = useRef<HTMLDivElement>(null);
     const mainContentRef = useRef<HTMLDivElement>(null);
+
+    const loadDefaultData = useCallback(() => {
+        console.log("API limit reached or error occurred. Loading default animal theme.");
+        setTheme('động vật');
+        setLegend(defaultGameData.iconMap);
+        setProblems(defaultGameData.problems.map((p, i) => ({ ...p, id: i })));
+        setUserAnswers({});
+        setError(null);
+    }, []);
 
     const generateGame = useCallback(async () => {
         if (!theme.trim()) {
@@ -94,13 +133,13 @@ const MaHoaPhepTinhGame = forwardRef<GameComponentHandles>((props, ref) => {
                 },
             });
 
-            const puzzleData = JSON.parse(response.text.trim());
+            const puzzleData = JSON.parse(response.text.trim()) as GameData;
              if (!puzzleData.iconMap || puzzleData.iconMap.length < 9 || !puzzleData.problems) {
                 throw new Error("Cấu trúc dữ liệu nhận từ AI không hợp lệ. Vui lòng tạo lại.");
             }
 
             const newLegend: LegendItem[] = puzzleData.iconMap;
-            const newProblems: SymbolProblem[] = puzzleData.problems.map((p: any, i: number) => ({ ...p, id: i }));
+            const newProblems: SymbolProblem[] = puzzleData.problems.map((p, i: number) => ({ ...p, id: i }));
 
             setLegend(newLegend);
             setProblems(newProblems);
@@ -112,11 +151,17 @@ const MaHoaPhepTinhGame = forwardRef<GameComponentHandles>((props, ref) => {
             if (e instanceof Error) {
                 errorMessage = e.message;
             }
-            setError(errorMessage);
+
+            // Check for rate limit error and use fallback
+            if (errorMessage.includes("429") || errorMessage.toUpperCase().includes("RESOURCE_EXHAUSTED")) {
+                loadDefaultData();
+            } else {
+                setError(errorMessage);
+            }
         } finally {
             setIsLoading(false);
         }
-    }, [theme]);
+    }, [theme, loadDefaultData]);
 
     useEffect(() => {
         generateGame();

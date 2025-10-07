@@ -36,6 +36,17 @@ const responseSchema = {
     required: ['legendEmojis', 'problemEmojis'],
 };
 
+// Default game data to use as a fallback for API errors
+const defaultGameData = {
+    legendEmojis: ['🍎', '🍌', '🍇', '🍓', '🍊'], // Apple, Banana, Grapes, Strawberry, Orange
+    problemEmojis: [
+        '🍎', '🍕', '🍌', '🍔', '🍇', 
+        '🍓', '🍊', '🍎', '🌭', '🍇', 
+        '🍌', '🍓', '🍟', '🍊', '🍎', 
+        '🍦', '🍇', '🍕', '🍌', '🍓'
+    ] // Mix of legend emojis and other food emojis (pizza, burger, hotdog, fries, ice cream)
+};
+
 
 const DienKiTuGame = forwardRef<GameComponentHandles>((props, ref) => {
     const [theme, setTheme] = useState('đồ ăn');
@@ -45,6 +56,22 @@ const DienKiTuGame = forwardRef<GameComponentHandles>((props, ref) => {
     const [problems, setProblems] = useState<EmojiProblemItem[]>([]);
     const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
     const gameContentRef = useRef<HTMLDivElement>(null);
+
+    const loadDefaultData = useCallback(() => {
+        console.log("API limit reached or error occurred. Loading default food theme.");
+        setTheme('đồ ăn');
+
+        const shuffledSymbols = shuffleArray(SYMBOLS);
+        const newLegend = defaultGameData.legendEmojis.map((emoji, index) => ({
+            emoji: emoji,
+            symbol: shuffledSymbols[index],
+        }));
+        
+        setLegend(newLegend);
+        setProblems(defaultGameData.problemEmojis.map((emoji, i) => ({ emoji, id: i })));
+        setUserAnswers({});
+        setError(null);
+    }, []);
 
     const generateGame = useCallback(async () => {
         if (!theme.trim()) {
@@ -94,11 +121,16 @@ const DienKiTuGame = forwardRef<GameComponentHandles>((props, ref) => {
             if (e instanceof Error) {
                 errorMessage = e.message;
             }
-            setError(errorMessage);
+            
+            if (errorMessage.includes("429") || errorMessage.toUpperCase().includes("RESOURCE_EXHAUSTED")) {
+                loadDefaultData();
+            } else {
+                setError(errorMessage);
+            }
         } finally {
             setIsLoading(false);
         }
-    }, [theme]);
+    }, [theme, loadDefaultData]);
 
     useEffect(() => {
         generateGame();
