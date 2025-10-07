@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, forwardRef, useImperat
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { GameComponentHandles, getRandomInt, shuffleArray } from '../utils';
+import '../Styles/NoiPhepTinh.css';
 
 interface MatchItem {
   id: string;

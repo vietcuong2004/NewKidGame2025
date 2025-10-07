@@ -1,0 +1,61 @@
+/* Matching Game General Styles */
+.matching-game-container {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+.matching-column {
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+.match-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+  font-weight: 700;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+.match-item:hover {
+  transform: scale(1.05);
+}
+.match-item.selected {
+  background-color: #fffbe6;
+  border-color: var(--secondary-color);
+  color: #333;
+}
+.matching-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* NoiPhepTinh Specific Styles */
+.matching-game-container:not(.noi-bong-game) {
+   justify-content: space-between;
+   max-width: 500px;
+}
+.matching-game-container:not(.noi-bong-game) .matching-column {
+  width: 40%;
+  align-items: center;
+  gap: 15px;
+}
+.matching-game-container:not(.noi-bong-game) .match-item {
+  width: 120px;
+  height: 60px;
+  font-size: 18px;
+  border: 2px solid var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .matching-game-container:not(.noi-bong-game) { flex-direction: column; align-items: center; gap: 20px; }
+  .matching-game-container:not(.noi-bong-game) .matching-column { width: 80%; }
+  .matching-canvas { display: none; }
+}

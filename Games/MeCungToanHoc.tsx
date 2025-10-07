@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, forwardRef, useImperat
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { GameComponentHandles, getRandomInt } from '../utils';
+import '../Styles/MeCungToanHoc.css';
 
 interface MazeNode {
   id: number;

@@ -3,6 +3,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { GameComponentHandles } from '../utils';
 import { GoogleGenAI, Type } from "@google/genai";
+import '../Styles/MaHoaPhepTinh.css';
 
 // Data structures for the game
 interface LegendItem {

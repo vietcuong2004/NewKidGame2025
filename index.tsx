@@ -2,6 +2,9 @@ import React, { useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import type { GameComponentHandles } from './utils';
 
+// CSS Imports
+import './index.css';
+
 // Import the new game components
 import NoiPhepTinhGame from './Games/NoiPhepTinh';
 import NoiBongGame from './Games/NoiBong';

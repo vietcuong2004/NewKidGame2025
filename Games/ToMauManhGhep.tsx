@@ -2,6 +2,7 @@ import React, { useState, useCallback, forwardRef, useImperativeHandle, useRef, 
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { GameComponentHandles, shuffleArray } from '../utils';
+import '../Styles/ToMauManhGhep.css';
 
 // --- L-Shape Puzzle Piece Components ---
 const LPiece1: React.FC<{ color: string; onClick: () => void }> = ({ color, onClick }) => (

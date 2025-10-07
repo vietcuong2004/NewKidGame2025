@@ -3,6 +3,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { GameComponentHandles, shuffleArray } from '../utils';
 import { GoogleGenAI, Type } from "@google/genai";
+import '../Styles/DienKiTu.css';
 
 // Data structures for the game
 interface EmojiLegendItem {
@@ -28,7 +29,7 @@ const responseSchema = {
         },
         problemEmojis: {
             type: Type.ARRAY,
-            description: 'A list of 20 emoji characters for the grid, related to the theme.',
+            description: 'A list of 20 emoji characters for the game grid, related to the theme.',
             items: { type: Type.STRING },
         },
     },

@@ -1,0 +1,109 @@
+/* Character Fill Game Styles */
+.character-fill-game {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+}
+
+.character-fill-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.character-fill-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.character-fill-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  padding: 20px;
+}
+
+.character-fill-error {
+  color: var(--incorrect-color);
+  font-weight: 700;
+  padding: 15px;
+  border: 1px solid var(--incorrect-color);
+  border-radius: 8px;
+  background-color: #fdecea;
+  text-align: center;
+}
+
+.character-fill-legend, .character-fill-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.character-fill-legend {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+}
+
+.char-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.char-figure-box, .char-symbol-box {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-size: 32px; /* For Emojis */
+}
+
+.char-symbol-box {
+    border: 2px solid #ccc;
+    font-size: 28px; /* Slightly smaller for symbols */
+    font-weight: 700;
+}
+.char-input-box {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+.char-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 28px; /* Match symbol box */
+    font-family: 'Nunito', sans-serif;
+    padding: 0;
+    background: transparent;
+    border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .char-figure-box, .char-symbol-box, .char-input-box { width: 50px; height: 50px; }
+}
+
+@media (max-width: 480px) {
+    .char-figure-box, .char-symbol-box, .char-input-box { width: 40px; height: 40px; }
+    .char-figure-box, .char-symbol-box { font-size: 24px; }
+    .char-input { font-size: 22px; }
+}

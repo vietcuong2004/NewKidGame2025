@@ -35,6 +35,62 @@ body {
   max-width: 1100px;
 }
 
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.btn-generate {
+  background-color: var(--secondary-color);
+}
+.btn-generate:hover {
+  background-color: #ffb300;
+}
+
+.btn-export {
+  background-color: var(--primary-color);
+}
+.btn-export:hover {
+  background-color: #039be5;
+}
+
+/* Styles for PDF Generation */
+.pdf-print-container {
+  position: absolute;
+  left: -9999px; /* Position off-screen */
+  top: 0;
+  background-color: white;
+  padding: 20px;
+  border: 2px dashed var(--primary-color);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pdf-title-button {
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  background-color: var(--primary-color);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .btn { font-size: 16px; padding: 10px 20px; }
+}
+
+/* App Layout Styles (from App.css) */
 .app-layout {
   width: 100%;
   background: white;
@@ -125,529 +181,9 @@ select#game-select {
   gap: 10px;
 }
 
-.btn {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 25px;
-  font-family: 'Nunito', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: white;
-}
-
-.btn-generate {
-  background-color: var(--secondary-color);
-}
-.btn-generate:hover {
-  background-color: #ffb300;
-}
-
-.btn-export {
-  background-color: var(--primary-color);
-}
-.btn-export:hover {
-  background-color: #039be5;
-}
-
-
-/* Game-specific styles */
-/* Symbol Math / Ma Hoa Phep Tinh */
-.symbol-math-game {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-}
-.symbol-math-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.theme-input {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-family: 'Nunito', sans-serif;
-  font-size: 16px;
-  min-width: 250px;
-}
-.symbol-math-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  color: var(--primary-color);
-  font-weight: 700;
-  font-size: 18px;
-  text-align: center;
-  padding: 20px;
-}
-.symbol-math-error {
-  color: var(--incorrect-color);
-  font-weight: 700;
-  padding: 15px;
-  border: 1px solid var(--incorrect-color);
-  border-radius: 8px;
-  background-color: #fdecea;
-  text-align: center;
-}
-.symbol-math-legend {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 25px;
-  margin-bottom: 25px;
-}
-.legend-item {
-  width: 60px;
-  height: 75px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  text-align: center;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  line-height: 1.1;
-}
-.legend-item-number {
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 2px;
-}
-.symbol-math-problems {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px 30px;
-}
-.problem-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 24px;
-  font-weight: 700;
-}
-.gift-box {
-  width: 60px;
-  height: 60px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  font-size: 36px;
-}
-.problem-input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: transparent;
-  text-align: center;
-  font-size: 22px;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-}
-
-
-/* Matching Game General */
-.matching-game-container {
-  display: flex;
-  width: 100%;
-  position: relative;
-}
-.matching-column {
-  display: flex;
-  flex-direction: column;
-  z-index: 10;
-}
-
-/* NoiPhepTinh Specific */
-.matching-game-container:not(.noi-bong-game) {
-   justify-content: space-between;
-   max-width: 500px;
-}
-.matching-game-container:not(.noi-bong-game) .matching-column {
-  width: 40%;
-  align-items: center;
-  gap: 15px;
-}
-.matching-game-container:not(.noi-bong-game) .match-item {
-  width: 120px;
-  height: 60px;
-  font-size: 18px;
-  border: 2px solid var(--accent-color);
-}
-
-/* NoiBong Specific */
-.noi-bong-game {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  width: 100%;
-  max-width: 400px;
-  justify-content: center;
-  gap: 0 20px;
-}
-
-.noi-bong-game .matching-column {
-  gap: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.noi-bong-game .matching-column.left-column {
-  align-items: flex-end;
-}
-
-.noi-bong-game .matching-column.right-column {
-  align-items: flex-start;
-}
-
-.noi-bong-game .match-row {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-.noi-bong-game .match-item {
-  width: 80px;
-  height: 80px;
-  background: #fdfdfd;
-  border: 2px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-}
-.noi-bong-game .match-item svg {
-  width: 50px;
-  height: 50px;
-}
-.separator-line {
-  width: 2px;
-  background-color: #e0e0e0;
-  align-self: stretch;
-}
-.connection-dot {
-  width: 12px;
-  height: 12px;
-  background-color: #bdc3c7;
-  border-radius: 50%;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-
-/* Common Match Item Styles */
-.match-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: var(--border-radius);
-  font-weight: 700;
-  cursor: pointer;
-  background-color: #fff;
-  transition: all 0.2s ease;
-}
-.match-item:hover {
-  transform: scale(1.05);
-}
-.match-item.selected {
-  background-color: #fffbe6;
-  border-color: var(--secondary-color);
-  color: #333;
-}
-
-.matching-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* Math Maze */
-.math-maze {
-  position: relative;
-  width: 100%;
-  max-width: 720px;
-  height: 720px;
-  margin: 0 auto;
-}
-
-.math-maze svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.maze-connector-line {
-  stroke: var(--primary-color);
-  stroke-width: 3;
-}
-
-.maze-arrowhead {
-  fill: var(--primary-color);
-}
-
-.maze-connector-text {
-  font-family: 'Nunito', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  fill: white;
-  text-anchor: middle;
-  dominant-baseline: middle;
-}
-
-.maze-node {
-  position: absolute;
-}
-
-.maze-label {
-    position: absolute;
-    top: -22px;
-    width: 120px;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
-    font-weight: 700;
-    color: #555;
-    font-size: 14px;
-}
-.maze-label.end-label {
-  width: 150px; /* Widen for longer text */
-}
-
-.maze-square {
-  width: 100%;
-  height: 100%;
-  border: 3px solid #bdc3c7;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 22px;
-  font-weight: 700;
-  background-color: white;
-  box-shadow: var(--box-shadow);
-}
-
-.maze-square.start {
-  background-color: #2ecc71;
-  color: white;
-  border-color: #27ae60;
-}
-
-.maze-square.end {
-  background-color: #f39c12;
-  color: white;
-  border-color: #e67e22;
-}
-
-.maze-input {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 22px;
-  border: none;
-  background: transparent;
-  border-radius: 9px;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  color: var(--text-color);
-  padding: 0;
-}
-
-/* Color Puzzle Game */
-.color-puzzle-game {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-}
-
-.reference-puzzle {
-  width: 150px;
-  height: 150px;
-  border: 2px solid var(--primary-color);
-  padding: 5px;
-  border-radius: var(--border-radius);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.puzzle-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  width: 100%;
-  max-width: 500px;
-}
-
-.puzzle-instance {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.puzzle-svg {
-  width: 120px;
-  height: 120px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-}
-
-.puzzle-piece {
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.puzzle-piece:hover {
-  opacity: 0.8;
-}
-
-.color-palette {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-}
-
-.color-swatch {
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.color-swatch.selected {
-  border-color: var(--primary-color);
-  transform: scale(1.15);
-  box-shadow: 0 0 8px rgba(41, 182, 246, 0.7);
-}
-
-
-/* Character Fill Game */
-.character-fill-game {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  align-items: center;
-}
-
-.character-fill-main-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.character-fill-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.character-fill-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  color: var(--primary-color);
-  font-weight: 700;
-  font-size: 18px;
-  text-align: center;
-  padding: 20px;
-}
-
-.character-fill-error {
-  color: var(--incorrect-color);
-  font-weight: 700;
-  padding: 15px;
-  border: 1px solid var(--incorrect-color);
-  border-radius: 8px;
-  background-color: #fdecea;
-  text-align: center;
-}
-
-
-.character-fill-legend, .character-fill-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-}
-
-.character-fill-legend {
-  border-bottom: 2px solid #eee;
-  padding-bottom: 15px;
-}
-
-.char-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
-
-.char-figure-box, .char-symbol-box {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  font-size: 32px; /* For Emojis */
-}
-
-.char-symbol-box {
-    border: 2px solid #ccc;
-    font-size: 28px; /* Slightly smaller for symbols */
-    font-weight: 700;
-}
-.char-input-box {
-    width: 60px;
-    height: 60px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-}
-.char-input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    text-align: center;
-    font-size: 28px; /* Match symbol box */
-    font-family: 'Nunito', sans-serif;
-    padding: 0;
-    background: transparent;
-    border-radius: 6px;
-}
-
 @media (max-width: 768px) {
   .app-layout { padding: 15px; }
   .app-header h1 { font-size: 24px; }
-  .btn { font-size: 16px; padding: 10px 20px; }
   
   .main-container {
     flex-direction: column;
@@ -656,45 +192,8 @@ select#game-select {
     flex: 0 0 auto;
     width: 100%;
   }
-
-  .matching-game-container:not(.noi-bong-game) { flex-direction: column; align-items: center; gap: 20px; }
-  .matching-game-container:not(.noi-bong-game) .matching-column { width: 80%; }
-  .matching-canvas { display: none; }
-  .math-maze { transform: scale(0.9); transform-origin: top center; height: 650px; }
-  .symbol-math-problems { grid-template-columns: 1fr; }
-  .puzzle-grid { grid-template-columns: 1fr; }
-  .char-figure-box, .char-symbol-box, .char-input-box { width: 50px; height: 50px; }
 }
 
 @media (max-width: 480px) {
-    .math-maze { transform: scale(0.65); transform-origin: top center; height: 470px; }
     .content-area { padding: 10px; }
-    .char-figure-box, .char-symbol-box, .char-input-box { width: 40px; height: 40px; }
-    .char-figure-box, .char-symbol-box { font-size: 24px; }
-    .char-input { font-size: 22px; }
-}
-
-/* Styles for PDF Generation */
-.pdf-print-container {
-  position: absolute;
-  left: -9999px; /* Position off-screen */
-  top: 0;
-  background-color: white;
-  padding: 20px;
-  border: 2px dashed var(--primary-color);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.pdf-title-button {
-  padding: 12px 24px;
-  border-radius: 25px;
-  font-family: 'Nunito', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  background-color: var(--primary-color);
-  text-align: center;
 }
